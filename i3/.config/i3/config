@@ -1,0 +1,274 @@
+# === Trapwriter's i3 === #
+
+# BASIC DEFINITIONS
+## Mod4 is Super; Mod1 is Alt
+set $mod Mod4
+## Font i3
+font pango:DejaVu Sans Mono 8
+## Default programs
+set $term  --no-startup-id xfce4-terminal
+
+# AUTOSTART
+## xrandr
+
+## wallpaper
+exec_always --no-startup-id feh --bg-scale ~/.config/i3/login-wall-lock/wall.jpg
+## wifi
+exec_always --no-startup-id nm-applet
+
+# VISUALS
+
+# BAR
+bar {
+	position top
+	font pango:DejaVu Sans Mono 8
+	status_command i3status -c ~/.config/i3/i3status.conf
+}
+
+# BASIC I3 KEYBINDINGS
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+q kill
+## Rofi - Application Starter
+bindsym $mod+d exec --no-startup-id rofi -show run
+## i3lock
+bindsym $mod+Shift+x exec i3lock -i ~/.config/i3/login-wall-lock/lock.png
+# config reload
+bindsym $mod+Shift+c reload
+# restart i3
+bindsym $mod+Shift+r restart
+# logout
+bindsym $mod+Shift+Escape exec i3-msg exit
+### shutdown and reboot
+bindsym $mod+Shift+Control+BackSpace	exec shutdown -h now
+bindsym $mod+Shift+Control+Delete	exec reboot
+
+## Focus Windows
+### change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+odiaeresis focus right
+### focus with arrow keys
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+### move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+odiaeresis move right
+### move with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+### splits horizontal | vertical
+bindsym $mod+h split h
+bindsym $mod+v split v
+### fullscreen mode
+bindsym $mod+f fullscreen toggle
+### stacked | tabbed | split
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+### tile | float
+floating_modifier $mod
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+### focus parent window
+bindsym $mod+a focus parent
+### focus the child container
+#bindsym $mod+d focus child
+
+## Resize Windows (Hand from HJKL to NM,.)
+bindsym $mod+Shift+n resize shrink width 10 px or 10 ppt
+bindsym $mod+Shift+m resize grow height 10 px or 10 ppt
+bindsym $mod+Shift+comma resize shrink height 10 px or 10 ppt
+bindsym $mod+Shift+period resize grow width 10 px or 10 ppt
+
+### same bindings, but for the arrow keys
+bindsym $mod+Shift+Control+Left resize shrink width 10 px or 10 ppt
+bindsym $mod+Shift+Control+Down resize grow height 10 px or 10 ppt
+bindsym $mod+Shift+Control+Up resize shrink height 10 px or 10 ppt
+bindsym $mod+Shift+Control+Right resize grow width 10 px or 10 ppt
+
+# WORKSPACE BINDINGS
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+## With Symbols
+#set $ws1 "1: 🙀"
+#set $ws2 "2: 🙀"
+#set $ws3 "3: 🙀"
+#set $ws4 "4: 🙀"
+#set $ws5 "5: "
+#set $ws6 "6: "
+#set $ws7 "7: "
+#set $ws8 "8: "
+#set $ws9 "9: "
+#set $ws10 "10: "
+
+## switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+## move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# FUNCTION KEYS
+#bindsym F1		
+#bindsym F2
+#bindsym F3
+#bindsym F4
+#bindsym F5
+#bindsym F6
+#bindsym F7
+#bindsym F8
+#bindsym F9
+#bindsym F10
+#bindsym F11		fullscreen toggle
+#bindsym F12
+
+#bindsym $mod+F1	
+#bindsym $mod+F2
+#bindsym $mod+F3
+#bindsym $mod+F4		
+#bindsym $mod+F5		exec --no-startup-id $netrefresh
+#bindsym $mod+F6	
+#bindsym $mod+F7	
+#bindsym $mod+F8	
+#bindsym $mod+F9	
+#bindsym $mod+F10	
+#bindsym $mod+F11	
+#bindsym $mod+F12
+
+# MEDIA KEYS
+## Definitions
+set $inc 	--no-startup-id amixer -D pulse sset Master 5%+ unmute
+set $biginc 	--no-startup-id amixer -D pulse sset Master 10%+ unmute
+set $dec 	--no-startup-id amixer -D pulse sset Master 5%- unmute
+set $bigdec 	--no-startup-id amixer -D pulse sset Master 10%- unmute
+set $mute 	--no-startup-id amixer -D pulse sset Master toggle
+set $truemute 	--no-startup-id amixer -D pulse sset Master mute
+
+## Volume Control
+bindsym $mod+plus		exec $inc
+bindsym $mod+Shift+plus		exec $biginc
+bindsym $mod+minus 		exec $dec
+bindsym $mod+Shift+minus	exec $bigdec
+bindsym $mod+Shift+numbersign	exec $mute
+
+# Extra XF86 Keys
+## These are the extra media keys some keyboards have
+bindsym XF86AudioMute		exec $mute
+bindsym XF86AudioLowerVolume	exec $dec
+bindsym XF86AudioRaiseVolume	exec $inc
+#bindsym XF86PowerOff		exec
+#bindsym XF86Copy		exec
+#bindsym XF86Open		exec
+#bindsym XF86Paste		exec
+#bindsym XF86Cut		exec
+#bindsym XF86MenuKB		exec
+#bindsym XF86Calculator		exec
+#bindsym XF86Sleep		exec
+#bindsym XF86WakeUp		exec
+#bindsym XF86Explorer		exec
+#bindsym XF86Send		exec
+#bindsym XF86Xfer		exec
+#bindsym XF86WWW		exec
+#bindsym XF86DOS		exec
+#bindsym XF86ScreenSaver	exec
+#bindsym XF86RotateWindows	exec
+#bindsym XF86TaskPane		exec
+#bindsym XF86Favorites		exec
+#bindsym XF86MyComputer		exec
+#bindsym XF86Back		exec
+#bindsym XF86Forward		exec
+#bindsym XF86Eject		exec
+#bindsym XF86AudioNext		exec $next
+#bindsym XF86AudioPlay		exec $pause
+#bindsym XF86AudioPrev		exec $prev
+#bindsym XF86AudioStop		exec $pause
+#bindsym XF86AudioRecord	exec
+#bindsym XF86AudioRewind	exec $lilbak
+#bindsym XF86AudioForward	exec $lilfor
+#bindsym XF86Phone		exec
+#bindsym XF86Tools		exec
+#bindsym XF86HomePage		exec
+#bindsym XF86Reload		exec
+#bindsym XF86ScrollUp		exec
+#bindsym XF86ScrollDown		exec
+#bindsym XF86New		exec
+#bindsym XF86LaunchA		exec
+#bindsym XF86LaunchB		exec
+#bindsym XF86Launch2		exec
+#bindsym XF86Launch3		exec
+#bindsym XF86Launch4		exec
+#bindsym XF86Launch5		exec
+#bindsym XF86Launch6		exec
+#bindsym XF86Launch7		exec
+#bindsym XF86Launch8		exec
+#bindsym XF86Launch9		exec
+#bindsym XF86AudioMicMute	exec 
+#bindsym XF86TouchpadToggle	exec
+bindsym XF86TouchpadOn		exec --no-startup-id exec synclient TouchpadOff=0
+bindsym XF86TouchpadOff		exec --no-startup-id exec synclient TouchpadOff=1
+#bindsym XF86Suspend		exec
+#bindsym XF86Close		exec
+#bindsym XF86WebCam		exec
+#bindsym XF86Mail		exec 
+#bindsym XF86Messenger		exec 
+#bindsym XF86Search		exec 
+#bindsym XF86Go			exec
+#bindsym XF86Finance		exec
+#bindsym XF86Game		exec
+#bindsym XF86Shop		exec
+#bindsym XF86KbdLightOnOff	exec
+#bindsym XF86AudioMedia		exec
+#bindsym XF86Display		exec --no-startup-id arandr
+#bindsym XF86Reply		exec
+#bindsym XF86MailForward	exec
+#bindsym XF86Save		exec
+#bindsym XF86Documents		exec
+#bindsym XF86Battery		exec
+#bindsym XF86Bluetooth		exec
+#bindsym XF86WLAN		exec $netrefresh
+
+# BRIGHTNESS (CHOOSE XBACKLIGHT FIRST, LIGHT IF IT DOESNT WORK)
+## XBACKLIGHT
+#bindsym XF86MonBrightnessDown	exec --no-startup-id xbacklight -dec 10
+#bindsym XF86MonBrightnessUp	exec --no-startup-id xbacklight -inc 10
+
+#bindsym XF86KbdBrightnessDown	exec --no-startup-id xbacklight -dec 10
+#bindsym XF86KbdBrightnessUp	exec --no-startup-id xbacklight -inc 10
+
+## LIGHT FROM GITHUB - https://github.com/haikarainen/light
+#bindsym XF86MonBrightnessDown	exec light -U 5 # decrease screen brightness
+#bindsym XF86MonBrightnessUp	exec light -A 5 # increase screen brightness
+#bindsym XF86KbdBrightnessDown	exec light -U 5 # decrease screen brightness
+#bindsym XF86KbdBrightnessUp	exec light -A 5 # increase screen brightness
